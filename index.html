@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RefugeeTalent Connect — Unlocking Displaced Talent</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              deep: '#0B4F6C',
+              blue: '#1E6091',
+              light: '#EBF5FB',
+              green: '#10B981',
+              greenDark: '#059669',
+              greenLight: '#ECFDF5',
+              surface: '#F8FAFC',
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-brand-surface text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Top Demo Role Switcher Banner (Evaluator Convenience) -->
+  <div class="bg-[#0B4F6C] text-white text-xs sm:text-sm py-2 px-4 border-b border-white/15">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+          <i class="fa-solid fa-bolt mr-1.5"></i> Quick Demo Switcher
+        </span>
+        <span class="text-slate-200 hidden md:inline">Switch roles instantly to test Refugee, Employer & Mentor workflows:</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5" id="demoSwitcherButtons">
+        <button onclick="quickSwitchRole('refugee')" data-demo="refugee" class="demo-btn px-2.5 py-1 rounded-lg font-medium transition text-xs bg-white/15 hover:bg-white/25 text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-user-graduate text-emerald-300"></i> Refugee (Amina K.)
+        </button>
+        <button onclick="quickSwitchRole('employer')" data-demo="employer" class="demo-btn px-2.5 py-1 rounded-lg font-medium transition text-xs bg-white/15 hover:bg-white/25 text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-building text-sky-300"></i> Employer (Horizon Tech)
+        </button>
+        <button onclick="quickSwitchRole('mentor')" data-demo="mentor" class="demo-btn px-2.5 py-1 rounded-lg font-medium transition text-xs bg-white/15 hover:bg-white/25 text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-chalkboard-user text-amber-300"></i> Mentor (Dr. Tariq M.)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Brand Logo -->
+        <button onclick="navigateTo('home')" class="flex items-center gap-2.5 text-left group focus:outline-none">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0B4F6C] via-[#1E6091] to-[#10B981] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+            <i class="fa-solid fa-earth-africa text-lg"></i>
+          </div>
+          <div>
+            <span class="block text-lg font-extrabold tracking-tight text-[#0B4F6C] leading-none">
+              RefugeeTalent <span class="text-[#10B981]">Connect</span>
+            </span>
+            <span class="block text-[11px] font-medium text-slate-500 mt-0.5">Unlocking Displaced Talent</span>
+          </div>
+        </button>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-1" id="desktopNav">
+          <button onclick="navigateTo('home')" data-nav="home" class="nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition">Home</button>
+          <button onclick="navigateTo('jobs')" data-nav="jobs" class="nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition">Find Jobs</button>
+          <button onclick="navigateTo('mentorship')" data-nav="mentorship" class="nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition">Mentorship</button>
+          <button onclick="navigateTo('internships')" data-nav="internships" class="nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition">Internships</button>
+          <button onclick="navigateTo('talent')" data-nav="talent" class="nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition">Talent Profiles</button>
+          <button onclick="navigateTo('dashboard')" data-nav="dashboard" class="nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition flex items-center gap-1.5">
+            <span>Dashboard</span>
+            <span id="navBadgeCount" class="hidden px-1.5 py-0.2 text-[11px] font-bold rounded-full bg-emerald-100 text-emerald-700">0</span>
+          </button>
+        </nav>
+
+        <!-- Right Auth Status & Mobile Toggle -->
+        <div class="flex items-center gap-2.5">
+          <!-- Messages Shortcut -->
+          <button onclick="openNetworkDrawer()" title="Connections & Messages" class="relative p-2.5 rounded-xl text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition">
+            <i class="fa-regular fa-comments text-lg"></i>
+            <span id="msgUnreadBadge" class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-[#10B981] ring-2 ring-white"></span>
+          </button>
+
+          <!-- User Status / Login Trigger -->
+          <div id="authHeaderSlot"></div>
+
+          <!-- Mobile Hamburger -->
+          <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none" aria-label="Toggle Menu">
+            <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-slate-200 px-4 pt-3 pb-5 space-y-1.5 shadow-lg">
+      <button onclick="navigateTo('home'); toggleMobileMenu(false)" data-nav="home" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100">Home</button>
+      <button onclick="navigateTo('jobs'); toggleMobileMenu(false)" data-nav="jobs" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100">Find Jobs</button>
+      <button onclick="navigateTo('mentorship'); toggleMobileMenu(false)" data-nav="mentorship" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100">Mentorship</button>
+      <button onclick="navigateTo('internships'); toggleMobileMenu(false)" data-nav="internships" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100">Internships</button>
+      <button onclick="navigateTo('talent'); toggleMobileMenu(false)" data-nav="talent" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100">Talent Profiles</button>
+      <button onclick="navigateTo('dashboard'); toggleMobileMenu(false)" data-nav="dashboard" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100">Dashboard</button>
+    </div>
+  </header>
+
+  <!-- Main SPA View Container -->
+  <main id="appMain" class="flex-grow"></main>
+
+  <!-- Footer -->
+  <footer class="bg-[#0B4F6C] text-slate-200 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-white/15">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-white">
+              <i class="fa-solid fa-earth-africa"></i>
+            </div>
+            <span class="text-xl font-bold text-white">RefugeeTalent <span class="text-emerald-400">Connect</span></span>
+          </div>
+          <p class="text-sm text-slate-300 max-w-md leading-relaxed">
+            Unlocking Displaced Talent: Pathways for Skilled Refugees. Bridging the gap between qualified displaced professionals, inclusive global employers, dedicated mentors, and practical virtual internships.
+          </p>
+          <div class="flex items-center gap-3 mt-4 text-xs text-emerald-300 font-medium">
+            <span><i class="fa-solid fa-check-circle mr-1"></i> SDG 8: Decent Work</span>
+            <span><i class="fa-solid fa-check-circle mr-1"></i> SDG 10: Reduced Inequalities</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-3">Platform Pathways</h4>
+          <ul class="space-y-2 text-sm text-slate-300">
+            <li><button onclick="navigateTo('jobs')" class="hover:text-emerald-300 transition">Skills-Matched Jobs</button></li>
+            <li><button onclick="navigateTo('internships')" class="hover:text-emerald-300 transition">Virtual Micro-Internships</button></li>
+            <li><button onclick="navigateTo('mentorship')" class="hover:text-emerald-300 transition">1-on-1 Industry Mentorship</button></li>
+            <li><button onclick="navigateTo('talent')" class="hover:text-emerald-300 transition">Verified Talent Directory</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-3">Demo Controls</h4>
+          <p class="text-xs text-slate-300 mb-3">Data is saved locally in your browser. Reset anytime to restore initial sample data.</p>
+          <button onclick="resetAllDemoData()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-medium transition border border-white/20">
+            <i class="fa-solid fa-rotate-right mr-1.5"></i> Reset Prototype Data
+          </button>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-2">
+        <p>© 2026 RefugeeTalent Connect. Built to reduce brain waste and promote inclusive economic growth.</p>
+        <p>Empowering displaced professionals worldwide.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS & DRAWERS ==================== -->
+
+  <!-- 1. Auth Modal (Login / Register) -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200">
+      <div class="bg-gradient-to-r from-[#0B4F6C] to-[#1E6091] p-6 text-white flex justify-between items-center">
+        <div>
+          <h3 id="authModalTitle" class="text-xl font-bold">Join RefugeeTalent Connect</h3>
+          <p class="text-xs text-sky-100 mt-0.5">Create an account or sign in to access your dashboard</p>
+        </div>
+        <button onclick="closeModal('authModal')" class="text-white/80 hover:text-white p-1.5 rounded-lg">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div class="p-6">
+        <!-- Auth Mode Tabs -->
+        <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl mb-5">
+          <button id="tabRegisterBtn" onclick="switchAuthTab('register')" class="py-2 rounded-lg text-sm font-semibold bg-white text-[#0B4F6C] shadow-sm transition">Register</button>
+          <button id="tabLoginBtn" onclick="switchAuthTab('login')" class="py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition">Sign In</button>
+        </div>
+
+        <!-- Register Form -->
+        <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-3.5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">I am joining as a...</label>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="regRole" value="refugee" checked class="peer sr-only" />
+                <div class="p-2.5 text-center rounded-xl border border-slate-200 peer-checked:border-[#10B981] peer-checked:bg-emerald-50 peer-checked:text-[#0B4F6C] text-xs font-semibold transition">
+                  <i class="fa-solid fa-user-graduate block text-base mb-1 text-[#10B981]"></i>Refugee Talent
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="regRole" value="employer" class="peer sr-only" />
+                <div class="p-2.5 text-center rounded-xl border border-slate-200 peer-checked:border-[#1E6091] peer-checked:bg-sky-50 peer-checked:text-[#0B4F6C] text-xs font-semibold transition">
+                  <i class="fa-solid fa-building block text-base mb-1 text-[#1E6091]"></i>Employer
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="regRole" value="mentor" class="peer sr-only" />
+                <div class="p-2.5 text-center rounded-xl border border-slate-200 peer-checked:border-[#0B4F6C] peer-checked:bg-sky-50 peer-checked:text-[#0B4F6C] text-xs font-semibold transition">
+                  <i class="fa-solid fa-chalkboard-user block text-base mb-1 text-[#0B4F6C]"></i>Mentor
+                </div>
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name / Organization Name</label>
+            <input type="text" id="regName" required placeholder="e.g., Samuel Deng or GlobalReach Labs" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#1E6091] focus:border-[#1E6091] outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+            <input type="email" id="regEmail" required placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#1E6091] focus:border-[#1E6091] outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Professional Title / Sector</label>
+            <input type="text" id="regTitle" required placeholder="e.g., Full-Stack Developer / FinTech Hiring" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#1E6091] focus:border-[#1E6091] outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Location / Work Preference</label>
+            <input type="text" id="regLocation" required placeholder="e.g., Nairobi / Remote Worldwide" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#1E6091] focus:border-[#1E6091] outline-none" />
+          </div>
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-semibold text-sm shadow-md transition">
+            Create Account & Open Dashboard
+          </button>
+        </form>
+
+        <!-- Login Form -->
+        <form id="loginForm" onsubmit="handleLogin(event)" class="hidden space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Select Existing Account or Enter Email</label>
+            <select id="loginAccountSelect" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:ring-2 focus:ring-[#1E6091] outline-none">
+              <option value="refugee">Amina Khaled — Senior Data Analyst (Refugee Talent)</option>
+              <option value="employer">Horizon Tech Global — Talent Acquisition (Employer)</option>
+              <option value="mentor">Dr. Tariq Mansour — Engineering Director (Mentor)</option>
+            </select>
+          </div>
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-[#0B4F6C] hover:bg-[#1E6091] text-white font-semibold text-sm shadow-md transition">
+            Sign In Now
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Talent Profile Detail Modal -->
+  <div id="talentDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200" id="talentDetailContent"></div>
+  </div>
+
+  <!-- 3. Mentorship Request Modal -->
+  <div id="mentorshipModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200">
+      <div class="bg-[#0B4F6C] p-5 text-white flex justify-between items-center">
+        <div>
+          <h3 class="text-lg font-bold">Request 1-on-1 Mentorship</h3>
+          <p id="mentorModalSubtitle" class="text-xs text-sky-200 mt-0.5">Connect with an experienced industry leader</p>
+        </div>
+        <button onclick="closeModal('mentorshipModal')" class="text-white/80 hover:text-white p-1.5">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <form onsubmit="submitMentorshipRequest(event)" class="p-6 space-y-4">
+        <input type="hidden" id="targetMentorId" />
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Focus Area</label>
+          <select id="mentorshipTopic" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white outline-none focus:ring-2 focus:ring-[#10B981]">
+            <option>CV & Portfolio Review for Global Employers</option>
+            <option>Technical Mock Interview & Career Strategy</option>
+            <option>Navigating Remote Work & Credential Recognition</option>
+            <option>Industry Networking & Skill Roadmap</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Your Goals & Introduction</label>
+          <textarea id="mentorshipNote" rows="4" required placeholder="Share your background, target role, and what you hope to achieve from mentorship..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-[#10B981]"></textarea>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('mentorshipModal')" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-100">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-sm font-semibold shadow">Send Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Professional Networking & Messaging Modal -->
+  <div id="networkModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden border border-slate-200">
+      <div class="bg-gradient-to-r from-[#0B4F6C] to-[#1E6091] p-5 text-white flex justify-between items-center">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-handshake text-emerald-300 text-xl"></i>
+          <div>
+            <h3 class="text-lg font-bold">Professional Network & Direct Messages</h3>
+            <p class="text-xs text-sky-100">Connect with mentors, hiring managers, and peer professionals</p>
+          </div>
+        </div>
+        <button onclick="closeModal('networkModal')" class="text-white/80 hover:text-white p-1.5">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div id="networkModalBody" class="p-5 overflow-y-auto flex-grow space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script>
+    const STORAGE_KEY = 'refugee_talent_connect_v1';
+
+    // Initial Rich Realistic Sample Data
+    const INITIAL_DATA = {
+      currentView: 'home',
+      currentUser: {
+        id: 'ref-1',
+        role: 'refugee',
+        name: 'Amina Khaled',
+        email: 'amina.khaled@talentconnect.org',
+        title: 'Data Analyst & Business Intelligence Specialist',
+        location: 'Dadaab / Remote Worldwide',
+        remotePref: 'Remote or Hybrid',
+        education: 'B.Sc. in Statistics & Economics, University of Damascus; Google Data Analytics Certificate',
+        experience: '4+ years analyzing humanitarian supply chains, retail KPIs, and SQL/Python reporting pipelines.',
+        skills: ['SQL', 'Python', 'Power BI', 'Data Visualization', 'Excel', 'Statistical Modeling', 'Cross-Cultural Communication'],
+        softSkills: ['Adaptability', 'Problem Solving', 'Stakeholder Reporting', 'Bilingual (Arabic/English)'],
+        portfolioUrl: 'https://portfolio.example.org/amina-khaled',
+        cvFileName: 'Amina_Khaled_Data_Analyst_CV_2026.pdf',
+        verified: true,
+        avatarColor: 'from-[#0B4F6C] to-[#10B981]'
+      },
+      talentProfiles: [
+        {
+          id: 'ref-1',
+          name: 'Amina Khaled',
+          title: 'Data Analyst & Business Intelligence Specialist',
+          location: 'Dadaab / Remote Worldwide',
+          remotePref: 'Remote or Hybrid',
+          education: 'B.Sc. in Statistics & Economics, University of Damascus; Google Data Analytics Certificate',
+          experience: '4+ years analyzing humanitarian supply chains, retail KPIs, and SQL/Python reporting pipelines.',
+          skills: ['SQL', 'Python', 'Power BI', 'Data Visualization', 'Excel', 'Statistical Modeling'],
+          softSkills: ['Adaptability', 'Problem Solving', 'Stakeholder Reporting', 'Arabic & English'],
+          portfolioUrl: 'https://portfolio.example.org/amina-khaled',
+          cvFileName: 'Amina_Khaled_Data_Analyst_CV_2026.pdf',
+          verified: true,
+          summary: 'Results-oriented Data Analyst skilled at transforming complex datasets into actionable executive dashboards. Ready for remote global teams.'
+        },
+        {
+          id: 'ref-2',
+          name: 'Jean-Paul Ndayishimiye',
+          title: 'Full-Stack Web Developer (React & Node.js)',
+          location: 'Kigali / Remote Global',
+          remotePref: 'Remote Only',
+          education: 'B.Eng. Software Engineering; ALX Africa Full-Stack Fellowship',
+          experience: '3 years building accessible web platforms, REST APIs, and e-commerce tools for NGOs and SMEs.',
+          skills: ['JavaScript', 'React', 'Node.js', 'Tailwind CSS', 'PostgreSQL', 'Git', 'REST APIs'],
+          softSkills: ['Agile Teamwork', 'Self-Directed Learning', 'French & English', 'Technical Documentation'],
+          portfolioUrl: 'https://github.com/jp-ndayishimiye-dev',
+          cvFileName: 'JP_Ndayishimiye_FullStack_CV.pdf',
+          verified: true,
+          summary: 'Passionate full-stack engineer focused on clean, resilient web apps with strong offline-first performance.'
+        },
+        {
+          id: 'ref-3',
+          name: 'Mariam Al-Mansoor',
+          title: 'UI/UX Product Designer & Accessibility Advocate',
+          location: 'Amman / Remote EMEA',
+          remotePref: 'Remote or On-site',
+          education: 'B.A. Graphic & Digital Media Design; Interaction Design Foundation Certified',
+          experience: '5 years designing mobile-first fintech and edtech products with WCAG accessibility compliance.',
+          skills: ['Figma', 'UI/UX Design', 'Design Systems', 'User Research', 'Prototyping', 'HTML/CSS'],
+          softSkills: ['Empathy-Driven Design', 'Client Workshops', 'Arabic, English & German'],
+          portfolioUrl: 'https://behance.net/mariam-ux',
+          cvFileName: 'Mariam_AlMansoor_UX_Portfolio.pdf',
+          verified: true,
+          summary: 'Human-centered designer turning intricate workflows into intuitive digital experiences.'
+        },
+        {
+          id: 'ref-4',
+          name: 'Dawit Tekle',
+          title: 'Cloud & Cybersecurity Support Engineer',
+          location: 'Nairobi / Hybrid or Remote',
+          remotePref: 'Remote or Hybrid',
+          education: 'B.Sc. Computer Networks; AWS Certified Solutions Architect Associate',
+          experience: '3.5 years administering Linux servers, cloud IAM policies, and Tier-2 incident response.',
+          skills: ['AWS', 'Linux', 'Cybersecurity', 'Docker', 'Python', 'Networking', 'CI/CD'],
+          softSkills: ['Calm Under Pressure', 'Incident Documentation', 'Tigrinya, Amharic & English'],
+          portfolioUrl: 'https://cloudnotes.example.org/dawit',
+          cvFileName: 'Dawit_Tekle_Cloud_Security_CV.pdf',
+          verified: true,
+          summary: 'Security-first cloud engineer dedicated to reliable infrastructure and automated monitoring.'
+        },
+        {
+          id: 'ref-5',
+          name: 'Soraia Rahimi',
+          title: 'Digital Marketing & Multilingual Content Strategist',
+          location: 'Toronto / Remote',
+          remotePref: 'Remote or Hybrid',
+          education: 'M.A. International Communications; HubSpot Inbound Marketing Certified',
+          experience: '4 years scaling SEO content, social impact campaigns, and B2B lead generation across 3 languages.',
+          skills: ['SEO', 'Content Strategy', 'Google Analytics', 'Copywriting', 'Social Media', 'HubSpot'],
+          softSkills: ['Storytelling', 'Cross-Market Localization', 'Dari, Farsi & English'],
+          portfolioUrl: 'https://soraiarahimi.example.org',
+          cvFileName: 'Soraia_Rahimi_Marketing_CV.pdf',
+          verified: true,
+          summary: 'Strategic communicator helping mission-driven brands grow organic reach and authentic engagement.'
+        },
+        {
+          id: 'ref-6',
+          name: 'Carlos Mendoza',
+          title: 'Financial Operations & ESG Reporting Analyst',
+          location: 'Bogotá / Remote Americas & Global',
+          remotePref: 'Remote Only',
+          education: 'B.Com. Accounting & Finance; IFRS & ESG Sustainability Reporting Certificate',
+          experience: '6 years managing multi-currency budgets, donor audits, and financial forecasting.',
+          skills: ['Financial Modeling', 'Excel', 'SQL', 'Power BI', 'ESG Reporting', 'Auditing'],
+          softSkills: ['Attention to Detail', 'Ethical Governance', 'Spanish & English'],
+          portfolioUrl: 'https://linkedin.com/in/carlos-mendoza-fin',
+          cvFileName: 'Carlos_Mendoza_Finance_CV.pdf',
+          verified: true,
+          summary: 'Detail-focused finance specialist experienced in cross-border compliance and transparent reporting.'
+        }
+      ],
+      jobs: [
+        {
+          id: 'job-1',
+          title: 'Junior / Mid Data & Impact Analyst',
+          company: 'Horizon Tech Global',
+          companyLogo: 'fa-chart-line',
+          location: 'Remote (Global)',
+          workMode: 'Remote',
+          category: 'Data & Analytics',
+          salary: '$42,000 – $54,000 / yr',
+          postedAgo: '2 days ago',
+          skillsRequired: ['SQL', 'Python', 'Power BI', 'Data Visualization', 'Excel'],
+          description: 'Join our inclusive global analytics team to build clean customer health dashboards, automate SQL pipelines, and deliver weekly insights. No local country work history required—skills-based hiring.',
+          inclusivePerks: ['Skills-First Hiring', 'Visa/Remote Payroll Support', 'Dedicated Onboarding Buddy']
+        },
+        {
+          id: 'job-2',
+          title: 'Frontend React & Accessibility Developer',
+          company: 'CivicBridge Digital',
+          companyLogo: 'fa-code',
+          location: 'Remote (EMEA / Americas)',
+          workMode: 'Remote',
+          category: 'Software Engineering',
+          salary: '$48,000 – $62,000 / yr',
+          postedAgo: '3 days ago',
+          skillsRequired: ['JavaScript', 'React', 'Tailwind CSS', 'HTML/CSS', 'Git'],
+          description: 'Build fast, WCAG-compliant public service portals used by millions. Collaborate in an asynchronous, supportive engineering team.',
+          inclusivePerks: ['Home Office Stipend', 'Flexible Hours', 'Paid Upskilling']
+        },
+        {
+          id: 'job-3',
+          title: 'Product Designer (UI/UX & Design Systems)',
+          company: 'KaziFlow Solutions',
+          companyLogo: 'fa-pen-nib',
+          location: 'Nairobi / Hybrid',
+          workMode: 'Hybrid',
+          category: 'Design & Creative',
+          salary: '$38,000 – $48,000 / yr',
+          postedAgo: '5 days ago',
+          skillsRequired: ['Figma', 'UI/UX Design', 'Design Systems', 'Prototyping', 'User Research'],
+          description: 'Shape mobile-first financial inclusion tools across East Africa. Work closely with user researchers and engineers.',
+          inclusivePerks: ['Refugee Talent Partner', 'Health Coverage', 'Mentorship Stipend']
+        },
+        {
+          id: 'job-4',
+          title: 'Cloud Infrastructure & DevOps Associate',
+          company: 'NordicCloud Systems',
+          companyLogo: 'fa-cloud',
+          location: 'Remote (Worldwide)',
+          workMode: 'Remote',
+          category: 'Cloud & Security',
+          salary: '$50,000 – $65,000 / yr',
+          postedAgo: '1 week ago',
+          skillsRequired: ['AWS', 'Linux', 'Docker', 'Python', 'CI/CD'],
+          description: 'Maintain resilient containerized microservices and automate security audits with our distributed SRE squad.',
+          inclusivePerks: ['Async-First Culture', 'Certification Vouchers', 'Global Contractor Support']
+        },
+        {
+          id: 'job-5',
+          title: 'Multilingual Growth & Content Specialist',
+          company: 'EduPathways International',
+          companyLogo: 'fa-bullhorn',
+          location: 'Remote (Global)',
+          workMode: 'Remote',
+          category: 'Marketing & Ops',
+          salary: '$34,000 – $44,000 / yr',
+          postedAgo: '1 week ago',
+          skillsRequired: ['SEO', 'Content Strategy', 'Copywriting', 'Google Analytics', 'Social Media'],
+          description: 'Lead multilingual learner outreach campaigns and craft compelling impact stories that connect displaced students to scholarships.',
+          inclusivePerks: ['Lived Experience Valued', 'Flexible Schedule', 'Annual Learning Grant']
+        }
+      ],
+      mentors: [
+        {
+          id: 'men-1',
+          name: 'Dr. Tariq Mansour',
+          role: 'Director of Engineering',
+          company: 'CloudScale Europe',
+          location: 'Berlin, Germany (Remote Mentorship)',
+          expertise: ['Software Engineering', 'Technical Interviews', 'Career Transition', 'Cloud Architecture'],
+          languages: ['English', 'Arabic', 'German'],
+          availability: 'Available (2 slots open)',
+          sessionsCompleted: 48,
+          bio: 'Former displaced engineer who rebuilt his tech career in Europe. Passionate about helping refugee technologists pass technical interviews and negotiate fair global salaries.'
+        },
+        {
+          id: 'men-2',
+          name: 'Elena Rostova',
+          role: 'Lead Data Scientist',
+          company: 'FinSight Analytics',
+          location: 'London, UK (Remote Mentorship)',
+          expertise: ['Data & Analytics', 'SQL & Python', 'Portfolio Building', 'CV Review'],
+          languages: ['English', 'Russian', 'French'],
+          availability: 'Available (3 slots open)',
+          sessionsCompleted: 36,
+          bio: 'Helps aspiring and mid-level analysts structure standout GitHub/Power BI portfolios that prove capability even without local corporate references.'
+        },
+        {
+          id: 'men-3',
+          name: 'David Ochieng',
+          role: 'Senior Talent Acquisition Partner',
+          company: 'Horizon Tech Global',
+          location: 'Nairobi, Kenya (Remote & Local)',
+          expertise: ['Hiring & Recruiter Insights', 'LinkedIn Optimization', 'Salary Negotiation', 'Remote Work Readiness'],
+          languages: ['English', 'Swahili'],
+          availability: 'Available (2 slots open)',
+          sessionsCompleted: 62,
+          bio: 'Recruited 120+ displaced professionals into remote tech and operations roles. Offers candid feedback on CVs and employer expectations.'
+        },
+        {
+          id: 'men-4',
+          name: 'Claire Beaumont',
+          role: 'Principal Product Designer',
+          company: 'Atelier UX Studio',
+          location: 'Montreal, Canada (Remote Mentorship)',
+          expertise: ['UI/UX Design', 'Case Study Storytelling', 'Figma Systems', 'Freelance Consulting'],
+          languages: ['English', 'French', 'Spanish'],
+          availability: 'Limited (1 slot open)',
+          sessionsCompleted: 29,
+          bio: 'Guides emerging UX/UI designers in turning volunteer and micro-internship projects into compelling case studies.'
+        }
+      ],
+      internships: [
+        {
+          id: 'int-1',
+          title: 'Global Supply Chain KPI Dashboard Sprint',
+          organization: 'ReliefLogistics Lab',
+          duration: '6 Weeks (10 hrs/week)',
+          stipend: '$450 Stipend + Verified Certificate',
+          skillsGained: ['Power BI', 'SQL', 'Data Cleaning', 'Executive Storytelling'],
+          deliverables: 'Build an interactive 3-page Power BI dashboard tracking medical delivery lead times and present findings to operations leads.',
+          spotsLeft: 4
+        },
+        {
+          id: 'int-2',
+          title: 'Accessible Community Health Web Portal',
+          organization: 'OpenCivic Tech',
+          duration: '8 Weeks (12 hrs/week)',
+          stipend: '$600 Stipend + GitHub Reference',
+          skillsGained: ['React', 'Tailwind CSS', 'WCAG Accessibility', 'Agile Git Workflow'],
+          deliverables: 'Develop a mobile-responsive clinic finder component with multi-language support and automated unit tests.',
+          spotsLeft: 3
+        },
+        {
+          id: 'int-3',
+          title: 'Fintech Mobile Onboarding UX Redesign',
+          organization: 'PayForward Inclusion',
+          duration: '4 Weeks (8 hrs/week)',
+          stipend: '$350 Stipend + Portfolio Case Study',
+          skillsGained: ['Figma', 'User Testing', 'Wireframing', 'Design Handoff'],
+          deliverables: 'Conduct 5 remote usability tests and deliver a high-fidelity interactive Figma prototype for low-bandwidth users.',
+          spotsLeft: 5
+        },
+        {
+          id: 'int-4',
+          title: 'ESG & Impact Metrics Audit Project',
+          organization: 'GreenFuture Ventures',
+          duration: '6 Weeks (10 hrs/week)',
+          stipend: '$500 Stipend + LinkedIn Recommendation',
+          skillsGained: ['Excel', 'ESG Reporting', 'Financial Modeling', 'Data Visualization'],
+          deliverables: 'Compile carbon and social impact metrics across 12 portfolio startups into a standardized investor scorecard.',
+          spotsLeft: 2
+        }
+      ],
+      jobApplications: [
+        {
+          id: 'app-init-1',
+          jobId: 'job-5',
+          jobTitle: 'Multilingual Growth & Content Specialist',
+          company: 'EduPathways International',
+          applicantId: 'ref-1',
+          applicantName: 'Amina Khaled',
+          applicantTitle: 'Data Analyst & Business Intelligence Specialist',
+          matchScore: 76,
+          status: 'Under Review',
+          appliedDate: '2026-11-22'
+        }
+      ],
+      internshipApplications: [
+        {
+          id: 'iapp-init-1',
+          internshipId: 'int-1',
+          internshipTitle: 'Global Supply Chain KPI Dashboard Sprint',
+          organization: 'ReliefLogistics Lab',
+          applicantId: 'ref-1',
+          applicantName: 'Amina Khaled',
+          status: 'Shortlisted',
+          appliedDate: '2026-11-20'
+        }
+      ],
+      mentorshipRequests: [
+        {
+          id: 'mreq-init-1',
+          mentorId: 'men-2',
+          mentorName: 'Elena Rostova',
+          menteeId: 'ref-1',
+          menteeName: 'Amina Khaled',
+          menteeTitle: 'Data Analyst & Business Intelligence Specialist',
+          topic: 'CV & Portfolio Review for Global Employers',
+          note: 'Hi Elena! I have 4 years of SQL and Power BI experience and would love feedback on tailoring my portfolio for remote European tech roles.',
+          status: 'Accepted — Session Scheduled',
+          createdDate: '2026-11-19'
+        }
+      ],
+      connections: [
+        {
+          id: 'conn-1',
+          targetId: 'men-1',
+          targetName: 'Dr. Tariq Mansour',
+          targetRole: 'Director of Engineering • CloudScale Europe',
+          status: 'Connected',
+          messages: [
+            { sender: 'Dr. Tariq Mansour', text: 'Welcome to RefugeeTalent Connect, Amina! Happy to introduce you to our data platform team anytime.', time: 'Yesterday' }
+          ]
+        },
+        {
+          id: 'conn-2',
+          targetId: 'emp-1',
+          targetName: 'David Ochieng (Horizon Tech Global)',
+          targetRole: 'Senior Talent Acquisition Partner',
+          status: 'Connected',
+          messages: [
+            { sender: 'David Ochieng', text: 'We reviewed your Power BI & SQL profile—take a look at our Junior/Mid Data & Impact Analyst role!', time: '2 days ago' }
+          ]
+        }
+      ]
+    };
+
+    // Load or Initialize State
+    let appState = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          return JSON.parse(raw);
+        }
+      } catch (e) {
+        console.warn('LocalStorage read failed, using initial data:', e);
+      }
+      saveState(INITIAL_DATA);
+      return JSON.parse(JSON.stringify(INITIAL_DATA));
+    }
+
+    function saveState(stateToSave = appState) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
+      } catch (e) {
+        console.warn('LocalStorage write failed:', e);
+      }
+    }
+
+    function resetAllDemoData() {
+      localStorage.removeItem(STORAGE_KEY);
+      appState = JSON.parse(JSON.stringify(INITIAL_DATA));
+      saveState();
+      updateHeaderUI();
+      renderCurrentView();
+      showToast('Prototype reset to initial sample data!', 'success');
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      const colors = type === 'success'
+        ? 'bg-[#0B4F6C] text-white border-l-4 border-[#10B981]'
+        : type === 'info'
+        ? 'bg-slate-800 text-white border-l-4 border-sky-400'
+        : 'bg-rose-700 text-white border-l-4 border-rose-300';
+
+      const icon = type === 'success' ? 'fa-circle-check text-[#10B981]' : 'fa-circle-info text-sky-300';
+
+      toast.className = `${colors} pointer-events-auto px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-sm font-medium transform transition-all duration-300 translate-y-2 opacity-0`;
+      toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i><span class="flex-1">${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3400);
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Dynamic Skill Match Score Calculator
+    function calculateMatchScore(jobSkills) {
+      const refProfile = appState.currentUser && appState.currentUser.role === 'refugee'
+        ? appState.currentUser
+        : appState.talentProfiles[0];
+
+      const userSkills = (refProfile.skills || []).map(s => s.toLowerCase().trim());
+      if (!jobSkills || jobSkills.length === 0) return 85;
+
+      let matches = 0;
+      jobSkills.forEach(js => {
+        const target = js.toLowerCase().trim();
+        if (userSkills.some(us => us.includes(target) || target.includes(us))) {
+          matches++;
+        }
+      });
+
+      const ratio = matches / jobSkills.length;
+      return Math.min(98, Math.max(58, Math.round(55 + ratio * 43)));
+    }
+
+    // ==================== NAVIGATION & HEADER ====================
+
+    function navigateTo(view) {
+      appState.currentView = view;
+      saveState();
+      updateHeaderUI();
+      renderCurrentView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu(forceState) {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('mobileMenuIcon');
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : menu.classList.contains('hidden');
+      if (shouldOpen) {
+        menu.classList.remove('hidden');
+        icon.className = 'fa-solid fa-xmark text-xl';
+      } else {
+        menu.classList.add('hidden');
+        icon.className = 'fa-solid fa-bars text-xl';
+      }
+    }
+
+    function updateHeaderUI() {
+      // Highlight active nav links
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        if (btn.dataset.nav === appState.currentView) {
+          btn.className = 'nav-link px-3 py-2 rounded-xl text-sm font-semibold bg-[#EBF5FB] text-[#0B4F6C] transition';
+        } else {
+          btn.className = 'nav-link px-3 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-[#0B4F6C] hover:bg-slate-100 transition';
+        }
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(btn => {
+        if (btn.dataset.nav === appState.currentView) {
+          btn.className = 'mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-[#EBF5FB] text-[#0B4F6C]';
+        } else {
+          btn.className = 'mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100';
+        }
+      });
+
+      // Highlight active Demo Switcher button
+      document.querySelectorAll('.demo-btn').forEach(btn => {
+        if (appState.currentUser && btn.dataset.demo === appState.currentUser.role) {
+          btn.classList.add('ring-2', 'ring-emerald-400', 'bg-white/25');
+        } else {
+          btn.classList.remove('ring-2', 'ring-emerald-400', 'bg-white/25');
+        }
+      });
+
+      // Dashboard counter badge
+      const badge = document.getElementById('navBadgeCount');
+      const totalActivity = appState.jobApplications.length + appState.internshipApplications.length + appState.mentorshipRequests.length;
+      if (totalActivity > 0) {
+        badge.textContent = totalActivity;
+        badge.classList.remove('hidden');
+      }
+
+      // Auth Slot
+      const slot = document.getElementById('authHeaderSlot');
+      const user = appState.currentUser;
+      if (user) {
+        const roleBadgeMap = {
+          refugee: { label: 'Refugee Talent', color: 'bg-emerald-100 text-emerald-800' },
+          employer: { label: 'Employer', color: 'bg-sky-100 text-[#0B4F6C]' },
+          mentor: { label: 'Mentor', color: 'bg-amber-100 text-amber-800' }
+        };
+        const rb = roleBadgeMap[user.role] || roleBadgeMap.refugee;
+        slot.innerHTML = `
+          <div class="flex items-center gap-2">
+            <button onclick="navigateTo('dashboard')" class="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-xl border border-slate-200 hover:border-[#1E6091] bg-slate-50 transition">
+              <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0B4F6C] to-[#10B981] text-white text-xs font-bold flex items-center justify-center">
+                ${escapeHtml(user.name.charAt(0).toUpperCase())}
+              </div>
+              <div class="hidden sm:block text-left">
+                <div class="text-xs font-bold text-slate-800 leading-tight">${escapeHtml(user.name)}</div>
+                <span class="inline-block text-[10px] font-semibold px-1.5 rounded ${rb.color}">${rb.label}</span>
+              </div>
+            </button>
+            <button onclick="openAuthModal('login')" title="Switch or Register Account" class="px-2.5 py-2 rounded-xl text-xs font-semibold text-[#0B4F6C] hover:bg-slate-100 border border-slate-200 transition">
+              Switch
+            </button>
+          </div>
+        `;
+      } else {
+        slot.innerHTML = `
+          <button onclick="openAuthModal('register')" class="px-4 py-2 rounded-xl bg-[#0B4F6C] hover:bg-[#1E6091] text-white text-xs sm:text-sm font-semibold shadow-sm transition">
+            Join / Sign In
+          </button>
+        `;
+      }
+    }
+
+    // ==================== AUTH & DEMO ROLE SWITCHER ====================
+
+    function quickSwitchRole(role) {
+      if (role === 'refugee') {
+        const mainRef = appState.talentProfiles[0];
+        appState.currentUser = {
+          id: mainRef.id,
+          role: 'refugee',
+          name: mainRef.name,
+          email: 'amina.khaled@talentconnect.org',
+          title: mainRef.title,
+          location: mainRef.location,
+          remotePref: mainRef.remotePref,
+          education: mainRef.education,
+          experience: mainRef.experience,
+          skills: [...mainRef.skills],
+          softSkills: [...mainRef.softSkills],
+          portfolioUrl: mainRef.portfolioUrl,
+          cvFileName: mainRef.cvFileName
+        };
+        showToast('Switched to Refugee Talent: Amina Khaled', 'success');
+      } else if (role === 'employer') {
+        appState.currentUser = {
+          id: 'emp-1',
+          role: 'employer',
+          name: 'Horizon Tech Global',
+          email: 'talent@horizontech.io',
+          title: 'Global Inclusive Hiring Partner',
+          location: 'London / Nairobi / Remote'
+        };
+        showToast('Switched to Employer: Horizon Tech Global', 'info');
+      } else if (role === 'mentor') {
+        const m = appState.mentors[0];
+        appState.currentUser = {
+          id: m.id,
+          role: 'mentor',
+          name: m.name,
+          email: 'tariq.mansour@cloudscale.eu',
+          title: `${m.role} at ${m.company}`,
+          location: m.location,
+          bio: m.bio,
+          availability: m.availability
+        };
+        showToast('Switched to Mentor: Dr. Tariq Mansour', 'info');
+      }
+      saveState();
+      updateHeaderUI();
+      renderCurrentView();
+    }
+
+    function openAuthModal(tab = 'register') {
+      const modal = document.getElementById('authModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      switchAuthTab(tab);
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function switchAuthTab(tab) {
+      const regForm = document.getElementById('registerForm');
+      const logForm = document.getElementById('loginForm');
+      const regBtn = document.getElementById('tabRegisterBtn');
+      const logBtn = document.getElementById('tabLoginBtn');
+
+      if (tab === 'register') {
+        regForm.classList.remove('hidden');
+        logForm.classList.add('hidden');
+        regBtn.className = 'py-2 rounded-lg text-sm font-semibold bg-white text-[#0B4F6C] shadow-sm transition';
+        logBtn.className = 'py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition';
+      } else {
+        regForm.classList.add('hidden');
+        logForm.classList.remove('hidden');
+        logBtn.className = 'py-2 rounded-lg text-sm font-semibold bg-white text-[#0B4F6C] shadow-sm transition';
+        regBtn.className = 'py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition';
+      }
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const role = document.querySelector('input[name="regRole"]:checked').value;
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const title = document.getElementById('regTitle').value.trim();
+      const location = document.getElementById('regLocation').value.trim();
+
+      const newId = `${role}-${Date.now()}`;
+      const newUser = {
+        id: newId,
+        role,
+        name,
+        email,
+        title,
+        location,
+        remotePref: 'Remote or Hybrid',
+        education: 'Verified Academic Credentials & Skills Assessment',
+        experience: 'Experienced professional ready to contribute to global teams.',
+        skills: ['Communication', 'Project Management', 'Problem Solving', 'Digital Collaboration'],
+        softSkills: ['Adaptability', 'Cross-Cultural Teamwork'],
+        portfolioUrl: 'https://portfolio.example.org',
+        cvFileName: `${name.replace(/\s+/g, '_')}_CV.pdf`
+      };
+
+      if (role === 'refugee') {
+        appState.talentProfiles.unshift({
+          ...newUser,
+          verified: true,
+          summary: `${title} based in ${location}, seeking inclusive local or remote opportunities.`
+        });
+      } else if (role === 'mentor') {
+        appState.mentors.unshift({
+          id: newId,
+          name,
+          role: title,
+          company: 'Industry Partner',
+          location,
+          expertise: ['Career Strategy', 'CV Review', 'Skill Building'],
+          languages: ['English'],
+          availability: 'Available (2 slots open)',
+          sessionsCompleted: 1,
+          bio: `Passionate mentor supporting displaced professionals in ${title}.`
+        });
+      }
+
+      appState.currentUser = newUser;
+      saveState();
+      closeModal('authModal');
+      updateHeaderUI();
+      navigateTo('dashboard');
+      showToast(`Welcome aboard, ${name}! Your ${role} dashboard is ready.`, 'success');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const selectedRole = document.getElementById('loginAccountSelect').value;
+      closeModal('authModal');
+      quickSwitchRole(selectedRole);
+      navigateTo('dashboard');
+    }
+
+    // ==================== VIEW RENDERER ====================
+
+    function renderCurrentView() {
+      const main = document.getElementById('appMain');
+      switch (appState.currentView) {
+        case 'home':
+          main.innerHTML = renderHomeView();
+          break;
+        case 'jobs':
+          main.innerHTML = renderJobsView();
+          break;
+        case 'mentorship':
+          main.innerHTML = renderMentorshipView();
+          break;
+        case 'internships':
+          main.innerHTML = renderInternshipsView();
+          break;
+        case 'talent':
+          main.innerHTML = renderTalentView();
+          break;
+        case 'dashboard':
+          main.innerHTML = renderDashboardView();
+          break;
+        default:
+          main.innerHTML = renderHomeView();
+      }
+    }
+
+    // ==================== 1. HOME / LANDING PAGE VIEW ====================
+
+    function renderHomeView() {
+      const featuredJobs = appState.jobs.slice(0, 3);
+      const featuredMentors = appState.mentors.slice(0, 3);
+      const featuredTalent = appState.talentProfiles.slice(0, 3);
+
+      return `
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-[#0B4F6C] via-[#1E6091] to-[#0B4F6C] text-white">
+          <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-emerald-300 text-xs sm:text-sm font-semibold">
+                  <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                  Unlocking Displaced Talent: Pathways for Skilled Refugees
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                  Where Displaced Expertise Meets <span class="text-[#10B981]">Global Opportunity.</span>
+                </h1>
+                <p class="text-base sm:text-lg text-sky-100 max-w-2xl leading-relaxed">
+                  Thousands of displaced engineers, analysts, designers, and specialists are ready to work. RefugeeTalent Connect replaces barriers with skills-based job matching, 1-on-1 mentorship, and paid virtual micro-internships.
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                  <button onclick="navigateTo('jobs')" class="px-6 py-3.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-950/30 transition flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase"></i> Explore Opportunities
+                  </button>
+                  <button onclick="openAuthModal('register')" class="px-6 py-3.5 rounded-xl bg-white text-[#0B4F6C] hover:bg-sky-50 font-bold text-sm sm:text-base shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-[#10B981]"></i> Join as Talent / Partner
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hero Right Interactive Card -->
+              <div class="lg:col-span-5">
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-2xl space-y-4">
+                  <div class="flex items-center justify-between border-b border-white/15 pb-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-300">Live Skills-First Matching</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500 text-white">94% Skill Match</span>
+                  </div>
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xl font-bold text-emerald-300">AK</div>
+                    <div>
+                      <h3 class="font-bold text-white text-base">Amina Khaled</h3>
+                      <p class="text-xs text-sky-200">Data & BI Analyst • Remote Worldwide</p>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 rounded-lg bg-white/15 text-xs font-medium">SQL</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/15 text-xs font-medium">Python</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/15 text-xs font-medium">Power BI</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/15 text-xs font-medium">Bilingual EN/AR</span>
+                  </div>
+                  <div class="bg-slate-900/40 rounded-xl p-3.5 text-xs text-sky-100 space-y-1.5">
+                    <div class="flex items-center justify-between">
+                      <span><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> Verified University Degree</span>
+                      <span class="text-emerald-300 font-semibold">Confirmed</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> Virtual Internship Deliverable</span>
+                      <span class="text-emerald-300 font-semibold">Completed</span>
+                    </div>
+                  </div>
+                  <button onclick="navigateTo('talent')" class="w-full py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-semibold transition">
+                    Browse Verified Talent Directory →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Impact Stats Bar -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-14 pt-10 border-t border-white/15">
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-white/10">
+                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-300">2,450+</div>
+                <div class="text-xs sm:text-sm text-sky-100 font-medium mt-1">Skilled Refugee Professionals</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-white/10">
+                <div class="text-2xl sm:text-3xl font-extrabold text-white">310+</div>
+                <div class="text-xs sm:text-sm text-sky-100 font-medium mt-1">Inclusive Global Employers</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-white/10">
+                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-300">1,820+</div>
+                <div class="text-xs sm:text-sm text-sky-100 font-medium mt-1">1-on-1 Mentorship Matches</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-white/10">
+                <div class="text-2xl sm:text-3xl font-extrabold text-white">92%</div>
+                <div class="text-xs sm:text-sm text-sky-100 font-medium mt-1">Virtual Internship Completion</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#10B981]">Ending Brain Waste</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B4F6C] mt-1">Three Pathways to Decent Work</h2>
+            <p class="text-sm sm:text-base text-slate-600 mt-2">Designed to overcome missing local references and build verifiable proof of skill.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 rounded-xl bg-sky-50 text-[#1E6091] flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-id-card-clip"></i>
+              </div>
+              <div class="text-xs font-bold text-[#10B981] uppercase mb-1">Step 01</div>
+              <h3 class="text-lg font-bold text-[#0B4F6C] mb-2">Showcase Verified Skills</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">Build a comprehensive professional profile highlighting degrees, technical stack, multilingual fluency, and portfolio work.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-[#10B981] flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-people-arrows"></i>
+              </div>
+              <div class="text-xs font-bold text-[#10B981] uppercase mb-1">Step 02</div>
+              <h3 class="text-lg font-bold text-[#0B4F6C] mb-2">Connect with Mentors & Projects</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">Pair with industry mentors for interview coaching and complete stipended virtual micro-internships to earn global references.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+              <div class="w-12 h-12 rounded-xl bg-sky-50 text-[#0B4F6C] flex items-center justify-center text-xl font-bold mb-4">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div class="text-xs font-bold text-[#10B981] uppercase mb-1">Step 03</div>
+              <h3 class="text-lg font-bold text-[#0B4F6C] mb-2">Land Decent Remote or Local Work</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">Apply directly to skills-matched roles at inclusive employers committed to fair pay and borderless opportunity.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Opportunities Preview -->
+        <section class="bg-white border-y border-slate-200 py-14">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#10B981]">Skills-Based Matching</span>
+                <h2 class="text-2xl font-extrabold text-[#0B4F6C] mt-1">Featured Inclusive Roles</h2>
+              </div>
+              <button onclick="navigateTo('jobs')" class="text-sm font-semibold text-[#1E6091] hover:text-[#0B4F6C] flex items-center gap-1">
+                View All ${appState.jobs.length} Jobs <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${featuredJobs.map(job => renderJobCard(job, true)).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Mentors & Talent Split Preview -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-14">
+          <div>
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#10B981]">1-on-1 Guidance</span>
+                <h2 class="text-2xl font-extrabold text-[#0B4F6C] mt-1">Active Industry Mentors</h2>
+              </div>
+              <button onclick="navigateTo('mentorship')" class="text-sm font-semibold text-[#1E6091] hover:text-[#0B4F6C] flex items-center gap-1">
+                Explore All Mentors <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${featuredMentors.map(m => renderMentorCard(m)).join('')}
+            </div>
+          </div>
+
+          <div>
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#10B981]">Verified Professionals</span>
+                <h2 class="text-2xl font-extrabold text-[#0B4F6C] mt-1">Featured Refugee Talent</h2>
+              </div>
+              <button onclick="navigateTo('talent')" class="text-sm font-semibold text-[#1E6091] hover:text-[#0B4F6C] flex items-center gap-1">
+                Browse Full Talent Directory <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${featuredTalent.map(t => renderTalentCard(t)).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    // ==================== 2. FIND JOBS VIEW ====================
+
+    function renderJobsView() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="bg-gradient-to-r from-[#0B4F6C] to-[#1E6091] rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-md">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold mb-2">
+                  <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI-Assisted Skill Match Active
+                </span>
+                <h1 class="text-2xl sm:text-3xl font-extrabold">Skills-Matched Job Opportunities</h1>
+                <p class="text-sm text-sky-100 mt-1">Match scores are dynamically calculated against ${appState.currentUser?.role === 'refugee' ? 'your' : "Amina Khaled's"} verified skills profile.</p>
+              </div>
+              ${appState.currentUser?.role === 'employer' ? `
+                <button onclick="navigateTo('dashboard')" class="px-4 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-sm font-bold shadow transition self-start">
+                  <i class="fa-solid fa-plus mr-1.5"></i> Post New Job
+                </button>
+              ` : ''}
+            </div>
+
+            <!-- Search & Filter Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                <input type="text" id="jobSearchInput" oninput="filterJobs()" placeholder="Search role, skill (e.g., SQL, React)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white text-slate-800 text-sm outline-none focus:ring-2 focus:ring-emerald-400" />
+              </div>
+              <select id="jobModeFilter" onchange="filterJobs()" class="px-3.5 py-2.5 rounded-xl bg-white text-slate-800 text-sm outline-none focus:ring-2 focus:ring-emerald-400">
+                <option value="all">All Work Modes (Remote, Hybrid, On-site)</option>
+                <option value="Remote">Remote Only</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="On-site">On-site</option>
+              </select>
+              <select id="jobCategoryFilter" onchange="filterJobs()" class="px-3.5 py-2.5 rounded-xl bg-white text-slate-800 text-sm outline-none focus:ring-2 focus:ring-emerald-400">
+                <option value="all">All Categories</option>
+                <option value="Data & Analytics">Data & Analytics</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Design & Creative">Design & Creative</option>
+                <option value="Cloud & Security">Cloud & Security</option>
+                <option value="Marketing & Ops">Marketing & Ops</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="jobsListGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            ${appState.jobs.map(job => renderJobCard(job)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function filterJobs() {
+      const q = (document.getElementById('jobSearchInput')?.value || '').toLowerCase();
+      const mode = document.getElementById('jobModeFilter')?.value || 'all';
+      const cat = document.getElementById('jobCategoryFilter')?.value || 'all';
+
+      const filtered = appState.jobs.filter(j => {
+        const matchesQuery = !q ||
+          j.title.toLowerCase().includes(q) ||
+          j.company.toLowerCase().includes(q) ||
+          j.skillsRequired.some(s => s.toLowerCase().includes(q));
+        const matchesMode = mode === 'all' || j.workMode.toLowerCase() === mode.toLowerCase();
+        const matchesCat = cat === 'all' || j.category === cat;
+        return matchesQuery && matchesMode && matchesCat;
+      });
+
+      const grid = document.getElementById('jobsListGrid');
+      if (!grid) return;
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full bg-white rounded-2xl p-10 text-center border border-slate-200 text-slate-500">No jobs matched your filters. Try clearing your search terms.</div>`;
+      } else {
+        grid.innerHTML = filtered.map(job => renderJobCard(job)).join('');
+      }
+    }
+
+    function renderJobCard(job, compact = false) {
+      const matchScore = calculateMatchScore(job.skillsRequired);
+      const currentApplicantId = appState.currentUser?.role === 'refugee' ? appState.currentUser.id : 'ref-1';
+      const alreadyApplied = appState.jobApplications.some(a => a.jobId === job.id && a.applicantId === currentApplicantId);
+
+      const matchBadgeColor = matchScore >= 85
+        ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+        : 'bg-sky-100 text-[#0B4F6C] border-sky-200';
+
+      return `
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-[#EBF5FB] text-[#0B4F6C] flex items-center justify-center text-lg">
+                  <i class="fa-solid ${escapeHtml(job.companyLogo || 'fa-building')}"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-base leading-snug">${escapeHtml(job.title)}</h3>
+                  <p class="text-xs font-semibold text-[#1E6091]">${escapeHtml(job.company)} • <span class="text-slate-500 font-normal">${escapeHtml(job.postedAgo)}</span></p>
+                </div>
+              </div>
+              <span class="shrink-0 px-2.5 py-1 rounded-full text-xs font-bold border ${matchBadgeColor}">
+                ${matchScore}% Match
+              </span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 text-xs text-slate-600 mb-3">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 font-medium"><i class="fa-solid fa-location-dot text-[#1E6091] mr-1"></i>${escapeHtml(job.location)}</span>
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-semibold">${escapeHtml(job.salary)}</span>
+            </div>
+
+            <p class="text-sm text-slate-600 mb-4 ${compact ? 'line-clamp-2' : ''}">${escapeHtml(job.description)}</p>
+
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              ${job.skillsRequired.map(s => `<span class="px-2.5 py-0.5 rounded-lg bg-sky-50 text-[#0B4F6C] text-xs font-medium border border-sky-100">${escapeHtml(s)}</span>`).join('')}
+            </div>
+
+            ${!compact && job.inclusivePerks ? `
+              <div class="flex flex-wrap gap-1.5 mb-4 pt-3 border-t border-slate-100">
+                ${job.inclusivePerks.map(p => `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md"><i class="fa-solid fa-check mr-1"></i>${escapeHtml(p)}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <button onclick="connectWithEntity('emp-${job.id}', '${escapeHtml(job.company)} Hiring Team', 'Employer • ${escapeHtml(job.company)}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-[#0B4F6C] hover:bg-slate-100 border border-slate-200 transition">
+              <i class="fa-regular fa-message mr-1"></i> Message Employer
+            </button>
+            ${alreadyApplied ? `
+              <button disabled class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center gap-1.5 cursor-default">
+                <i class="fa-solid fa-circle-check"></i> Applied
+              </button>
+            ` : `
+              <button onclick="applyForJob('${job.id}')" class="px-4 py-2 rounded-xl bg-[#0B4F6C] hover:bg-[#1E6091] text-white text-xs font-bold shadow-sm transition">
+                Apply Now
+              </button>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function applyForJob(jobId) {
+      const job = appState.jobs.find(j => j.id === jobId);
+      if (!job) return;
+
+      const candidate = appState.currentUser?.role === 'refugee'
+        ? appState.currentUser
+        : appState.talentProfiles[0];
+
+      const exists = appState.jobApplications.some(a => a.jobId === jobId && a.applicantId === candidate.id);
+      if (exists) {
+        showToast('You have already applied to this position.', 'info');
+        return;
+      }
+
+      appState.jobApplications.unshift({
+        id: `app-${Date.now()}`,
+        jobId: job.id,
+        jobTitle: job.title,
+        company: job.company,
+        applicantId: candidate.id,
+        applicantName: candidate.name,
+        applicantTitle: candidate.title,
+        matchScore: calculateMatchScore(job.skillsRequired),
+        status: 'Submitted',
+        appliedDate: new Date().toISOString().slice(0, 10)
+      });
+
+      saveState();
+      updateHeaderUI();
+      renderCurrentView();
+      showToast(`Application submitted to ${job.company} for ${job.title}!`, 'success');
+    }
+
+    // ==================== 3. MENTORSHIP PROGRAM VIEW ====================
+
+    function renderMentorshipView() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="bg-gradient-to-r from-[#0B4F6C] to-[#10B981] rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-md">
+            <h1 class="text-2xl sm:text-3xl font-extrabold">1-on-1 Industry Mentorship Program</h1>
+            <p class="text-sm text-sky-50 mt-1 max-w-2xl">Connect with global engineering leaders, recruiters, and designers who help displaced professionals refine CVs, practice interviews, and unlock hidden job networks.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 max-w-2xl">
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                <input type="text" id="mentorSearchInput" oninput="filterMentors()" placeholder="Search mentor name, company, or language..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white text-slate-800 text-sm outline-none" />
+              </div>
+              <select id="mentorExpertiseFilter" onchange="filterMentors()" class="px-3.5 py-2.5 rounded-xl bg-white text-slate-800 text-sm outline-none">
+                <option value="all">All Expertise Areas</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Data & Analytics">Data & Analytics</option>
+                <option value="Hiring & Recruiter Insights">Hiring & Recruiter Insights</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="CV Review">CV Review</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="mentorsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            ${appState.mentors.map(m => renderMentorCard(m)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function filterMentors() {
+      const q = (document.getElementById('mentorSearchInput')?.value || '').toLowerCase();
+      const exp = document.getElementById('mentorExpertiseFilter')?.value || 'all';
+
+      const filtered = appState.mentors.filter(m => {
+        const matchesQ = !q ||
+          m.name.toLowerCase().includes(q) ||
+          m.company.toLowerCase().includes(q) ||
+          m.languages.some(l => l.toLowerCase().includes(q)) ||
+          m.expertise.some(e => e.toLowerCase().includes(q));
+        const matchesExp = exp === 'all' || m.expertise.some(e => e.toLowerCase().includes(exp.toLowerCase()));
+        return matchesQ && matchesExp;
+      });
+
+      const grid = document.getElementById('mentorsGrid');
+      if (grid) {
+        grid.innerHTML = filtered.length
+          ? filtered.map(m => renderMentorCard(m)).join('')
+          : `<div class="col-span-full bg-white rounded-2xl p-10 text-center border border-slate-200 text-slate-500">No mentors matched your criteria.</div>`;
+      }
+    }
+
+    function renderMentorCard(mentor) {
+      const menteeId = appState.currentUser?.role === 'refugee' ? appState.currentUser.id : 'ref-1';
+      const existingReq = appState.mentorshipRequests.find(r => r.mentorId === mentor.id && r.menteeId === menteeId);
+
+      return `
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0B4F6C] to-[#1E6091] text-white font-bold flex items-center justify-center text-base">
+                  ${escapeHtml(mentor.name.split(' ').map(n => n[0]).join('').slice(0, 2))}
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-base">${escapeHtml(mentor.name)}</h3>
+                  <p class="text-xs font-semibold text-[#1E6091]">${escapeHtml(mentor.role)} • ${escapeHtml(mentor.company)}</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                ${escapeHtml(mentor.availability)}
+              </span>
+            </div>
+
+            <p class="text-xs text-slate-500 mb-3"><i class="fa-solid fa-language text-[#10B981] mr-1"></i> Languages: <strong class="text-slate-700">${escapeHtml(mentor.languages.join(', '))}</strong> • ${mentor.sessionsCompleted} sessions</p>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">${escapeHtml(mentor.bio)}</p>
+
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              ${mentor.expertise.map(e => `<span class="px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">${escapeHtml(e)}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <button onclick="connectWithEntity('${mentor.id}', '${escapeHtml(mentor.name)}', '${escapeHtml(mentor.role)} • ${escapeHtml(mentor.company)}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-[#0B4F6C] hover:bg-slate-100 border border-slate-200 transition">
+              <i class="fa-solid fa-user-plus mr-1"></i> Connect
+            </button>
+            ${existingReq ? `
+              <span class="px-3.5 py-2 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold">
+                <i class="fa-solid fa-check-circle mr-1"></i> ${escapeHtml(existingReq.status)}
+              </span>
+            ` : `
+              <button onclick="openMentorshipModal('${mentor.id}')" class="px-4 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-sm transition">
+                Request Mentorship
+              </button>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function openMentorshipModal(mentorId) {
+      const mentor = appState.mentors.find(m => m.id === mentorId);
+      if (!mentor) return;
+      document.getElementById('targetMentorId').value = mentor.id;
+      document.getElementById('mentorModalSubtitle').textContent = `Mentorship with ${mentor.name} (${mentor.role} at ${mentor.company})`;
+      document.getElementById('mentorshipNote').value = '';
+      const modal = document.getElementById('mentorshipModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function submitMentorshipRequest(e) {
+      e.preventDefault();
+      const mentorId = document.getElementById('targetMentorId').value;
+      const topic = document.getElementById('mentorshipTopic').value;
+      const note = document.getElementById('mentorshipNote').value.trim();
+      const mentor = appState.mentors.find(m => m.id === mentorId);
+      if (!mentor) return;
+
+      const mentee = appState.currentUser?.role === 'refugee'
+        ? appState.currentUser
+        : appState.talentProfiles[0];
+
+      appState.mentorshipRequests.unshift({
+        id: `mreq-${Date.now()}`,
+        mentorId: mentor.id,
+        mentorName: mentor.name,
+        menteeId: mentee.id,
+        menteeName: mentee.name,
+        menteeTitle: mentee.title,
+        topic,
+        note,
+        status: 'Pending Mentor Approval',
+        createdDate: new Date().toISOString().slice(0, 10)
+      });
+
+      saveState();
+      closeModal('mentorshipModal');
+      updateHeaderUI();
+      renderCurrentView();
+      showToast(`Mentorship request sent to ${mentor.name}!`, 'success');
+    }
+
+    // ==================== 4. VIRTUAL INTERNSHIPS VIEW ====================
+
+    function renderInternshipsView() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="bg-gradient-to-r from-[#0B4F6C] via-[#1E6091] to-[#10B981] rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-md">
+            <span class="inline-block px-3 py-1 rounded-full bg-white/15 text-emerald-200 text-xs font-bold mb-2">
+              <i class="fa-solid fa-laptop-code mr-1"></i> Practical Portfolio Builders
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold">Virtual Project Internships</h1>
+            <p class="text-sm text-sky-100 mt-1 max-w-2xl">Gain verifiable international work experience, earn stipends, and build real portfolio deliverables alongside vetted partner organizations.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            ${appState.internships.map(intern => {
+              const candidateId = appState.currentUser?.role === 'refugee' ? appState.currentUser.id : 'ref-1';
+              const applied = appState.internshipApplications.some(a => a.internshipId === intern.id && a.applicantId === candidateId);
+
+              return `
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                      <div>
+                        <span class="text-xs font-bold text-[#10B981] uppercase tracking-wider">${escapeHtml(intern.organization)}</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-0.5">${escapeHtml(intern.title)}</h3>
+                      </div>
+                      <span class="shrink-0 px-2.5 py-1 rounded-full text-xs font-bold bg-sky-50 text-[#0B4F6C] border border-sky-200">
+                        ${intern.spotsLeft} spots left
+                      </span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 text-xs mb-4">
+                      <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium"><i class="fa-regular fa-clock mr-1 text-[#1E6091]"></i>${escapeHtml(intern.duration)}</span>
+                      <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-semibold"><i class="fa-solid fa-coins mr-1 text-[#10B981]"></i>${escapeHtml(intern.stipend)}</span>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-100 mb-4">
+                      <div class="text-xs font-bold text-slate-700 mb-1">Key Deliverable:</div>
+                      <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(intern.deliverables)}</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                      ${intern.skillsGained.map(s => `<span class="px-2.5 py-0.5 rounded-lg bg-sky-50 text-[#0B4F6C] text-xs font-medium">${escapeHtml(s)}</span>`).join('')}
+                    </div>
+                  </div>
+
+                  <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs text-slate-500"><i class="fa-solid fa-certificate text-emerald-500 mr-1"></i> Includes Reference Letter</span>
+                    ${applied ? `
+                      <button disabled class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold">
+                        <i class="fa-solid fa-circle-check mr-1"></i> Applied
+                      </button>
+                    ` : `
+                      <button onclick="applyForInternship('${intern.id}')" class="px-4 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-sm transition">
+                        Apply for Project
+                      </button>
+                    `}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function applyForInternship(internshipId) {
+      const intern = appState.internships.find(i => i.id === internshipId);
+      if (!intern) return;
+
+      const candidate = appState.currentUser?.role === 'refugee'
+        ? appState.currentUser
+        : appState.talentProfiles[0];
+
+      if (appState.internshipApplications.some(a => a.internshipId === internshipId && a.applicantId === candidate.id)) {
+        return;
+      }
+
+      appState.internshipApplications.unshift({
+        id: `iapp-${Date.now()}`,
+        internshipId: intern.id,
+        internshipTitle: intern.title,
+        organization: intern.organization,
+        applicantId: candidate.id,
+        applicantName: candidate.name,
+        status: 'Application Received',
+        appliedDate: new Date().toISOString().slice(0, 10)
+      });
+
+      saveState();
+      updateHeaderUI();
+      renderCurrentView();
+      showToast(`Applied for "${intern.title}" virtual internship!`, 'success');
+    }
+
+    // ==================== 5. TALENT PROFILES DIRECTORY VIEW ====================
+
+    function renderTalentView() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#10B981]">Verified Displaced Professionals</span>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-[#0B4F6C] mt-1">Refugee Talent Directory</h1>
+                <p class="text-sm text-slate-600 mt-1">Discover qualified engineers, analysts, designers, and operations specialists ready for remote or local roles.</p>
+              </div>
+              <button onclick="navigateTo('dashboard')" class="px-4 py-2.5 rounded-xl bg-[#0B4F6C] hover:bg-[#1E6091] text-white text-xs sm:text-sm font-semibold self-start transition">
+                <i class="fa-solid fa-user-pen mr-1.5"></i> Edit My Talent Profile
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                <input type="text" id="talentSearchInput" oninput="filterTalent()" placeholder="Search name, role, skill (e.g., Python, Figma, AWS)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-[#1E6091]" />
+              </div>
+              <select id="talentPrefFilter" onchange="filterTalent()" class="px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white outline-none focus:ring-2 focus:ring-[#1E6091]">
+                <option value="all">All Location Preferences</option>
+                <option value="Remote">Remote Available</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="On-site">On-site</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="talentGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${appState.talentProfiles.map(t => renderTalentCard(t)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function filterTalent() {
+      const q = (document.getElementById('talentSearchInput')?.value || '').toLowerCase();
+      const pref = document.getElementById('talentPrefFilter')?.value || 'all';
+
+      const filtered = appState.talentProfiles.filter(t => {
+        const matchesQ = !q ||
+          t.name.toLowerCase().includes(q) ||
+          t.title.toLowerCase().includes(q) ||
+          t.skills.some(s => s.toLowerCase().includes(q)) ||
+          t.location.toLowerCase().includes(q);
+        const matchesPref = pref === 'all' || t.remotePref.toLowerCase().includes(pref.toLowerCase());
+        return matchesQ && matchesPref;
+      });
+
+      const grid = document.getElementById('talentGrid');
+      if (grid) {
+        grid.innerHTML = filtered.length
+          ? filtered.map(t => renderTalentCard(t)).join('')
+          : `<div class="col-span-full bg-white rounded-2xl p-10 text-center border border-slate-200 text-slate-500">No talent profiles matched your filters.</div>`;
+      }
+    }
+
+    function renderTalentCard(talent) {
+      return `
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0B4F6C] to-[#10B981] text-white font-bold flex items-center justify-center text-base">
+                  ${escapeHtml(talent.name.split(' ').map(n => n[0]).join('').slice(0, 2))}
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-base leading-tight">${escapeHtml(talent.name)}</h3>
+                  <p class="text-xs font-semibold text-[#1E6091] mt-0.5">${escapeHtml(talent.title)}</p>
+                </div>
+              </div>
+              ${talent.verified ? `<span title="Verified Credentials" class="text-[#10B981] text-base"><i class="fa-solid fa-circle-check"></i></span>` : ''}
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 text-xs text-slate-600 mb-3">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100"><i class="fa-solid fa-location-dot text-[#1E6091] mr-1"></i>${escapeHtml(talent.location)}</span>
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-semibold">${escapeHtml(talent.remotePref)}</span>
+            </div>
+
+            <p class="text-xs text-slate-600 mb-3 line-clamp-2 leading-relaxed">${escapeHtml(talent.summary || talent.experience)}</p>
+
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              ${talent.skills.slice(0, 5).map(s => `<span class="px-2.5 py-0.5 rounded-lg bg-sky-50 text-[#0B4F6C] text-xs font-medium">${escapeHtml(s)}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <button onclick="openTalentDetailModal('${talent.id}')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">
+              View Full CV & Bio
+            </button>
+            <button onclick="connectWithEntity('${talent.id}', '${escapeHtml(talent.name)}', '${escapeHtml(talent.title)}')" class="px-3.5 py-2 rounded-xl bg-[#0B4F6C] hover:bg-[#1E6091] text-white text-xs font-semibold transition">
+              <i class="fa-solid fa-handshake mr-1"></i> Connect
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function openTalentDetailModal(talentId) {
+      const t = appState.talentProfiles.find(p => p.id === talentId);
+      if (!t) return;
+
+      const content = document.getElementById('talentDetailContent');
+      content.innerHTML = `
+        <div class="bg-gradient-to-r from-[#0B4F6C] to-[#1E6091] p-6 text-white flex justify-between items-start">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center text-xl font-extrabold">
+              ${escapeHtml(t.name.split(' ').map(n => n[0]).join('').slice(0, 2))}
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-xl font-bold">${escapeHtml(t.name)}</h3>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500 text-white">Verified Talent</span>
+              </div>
+              <p class="text-sm text-sky-100 mt-0.5">${escapeHtml(t.title)}</p>
+              <p class="text-xs text-emerald-300 mt-1"><i class="fa-solid fa-location-dot mr-1"></i>${escapeHtml(t.location)} • ${escapeHtml(t.remotePref)}</p>
+            </div>
+          </div>
+          <button onclick="closeModal('talentDetailModal')" class="text-white/80 hover:text-white p-1.5">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+        <div class="p-6 space-y-5 text-sm">
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Professional Summary</h4>
+            <p class="text-slate-700 leading-relaxed">${escapeHtml(t.summary || t.experience)}</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[#0B4F6C] mb-1.5"><i class="fa-solid fa-graduation-cap mr-1"></i> Education & Qualifications</h4>
+              <p class="text-xs text-slate-700 leading-relaxed">${escapeHtml(t.education)}</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[#0B4F6C] mb-1.5"><i class="fa-solid fa-briefcase mr-1"></i> Experience Highlights</h4>
+              <p class="text-xs text-slate-700 leading-relaxed">${escapeHtml(t.experience)}</p>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Technical & Core Skills</h4>
+            <div class="flex flex-wrap gap-1.5">
+              ${t.skills.map(s => `<span class="px-3 py-1 rounded-lg bg-sky-50 text-[#0B4F6C] text-xs font-semibold border border-sky-100">${escapeHtml(s)}</span>`).join('')}
+            </div>
+          </div>
+          ${t.softSkills ? `
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Soft Skills & Languages</h4>
+              <div class="flex flex-wrap gap-1.5">
+                ${t.softSkills.map(s => `<span class="px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-100">${escapeHtml(s)}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+            <div class="flex items-center gap-3 text-xs">
+              <span class="px-3 py-2 rounded-xl bg-slate-100 text-slate-700 font-medium">
+                <i class="fa-solid fa-file-pdf text-rose-600 mr-1.5"></i>${escapeHtml(t.cvFileName || 'Verified_CV.pdf')}
+              </span>
+              <a href="${escapeHtml(t.portfolioUrl || '#')}" target="_blank" rel="noopener noreferrer" class="text-[#1E6091] hover:underline font-semibold">
+                <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Portfolio Link
+              </a>
+            </div>
+            <button onclick="closeModal('talentDetailModal'); connectWithEntity('${t.id}', '${escapeHtml(t.name)}', '${escapeHtml(t.title)}')" class="px-5 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow transition">
+              Connect & Message
+            </button>
+          </div>
+        </div>
+      `;
+
+      const modal = document.getElementById('talentDetailModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    // ==================== 6. PROFESSIONAL NETWORKING & MESSAGING ====================
+
+    function connectWithEntity(targetId, targetName, targetRole) {
+      let conn = appState.connections.find(c => c.targetId === targetId || c.targetName === targetName);
+      if (!conn) {
+        conn = {
+          id: `conn-${Date.now()}`,
+          targetId,
+          targetName,
+          targetRole,
+          status: 'Connected',
+          messages: [
+            {
+              sender: 'System',
+              text: `You are now connected with ${targetName}. Send an introductory message below!`,
+              time: 'Just now'
+            }
+          ]
+        };
+        appState.connections.unshift(conn);
+        saveState();
+        showToast(`Connected with ${targetName}!`, 'success');
+      }
+      openNetworkDrawer(conn.id);
+    }
+
+    function openNetworkDrawer(selectedConnId = null) {
+      const body = document.getElementById('networkModalBody');
+      const activeConn = selectedConnId
+        ? appState.connections.find(c => c.id === selectedConnId)
+        : appState.connections[0];
+
+      body.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div class="md:col-span-5 border-r border-slate-200 pr-0 md:pr-3 space-y-2">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Your Connections (${appState.connections.length})</div>
+            ${appState.connections.map(c => `
+              <button onclick="openNetworkDrawer('${c.id}')" class="w-full text-left p-3 rounded-xl border transition ${activeConn && activeConn.id === c.id ? 'bg-[#EBF5FB] border-[#1E6091]' : 'bg-white border-slate-200 hover:bg-slate-50'}">
+                <div class="font-bold text-xs text-slate-900">${escapeHtml(c.targetName)}</div>
+                <div class="text-[11px] text-slate-500 truncate">${escapeHtml(c.targetRole)}</div>
+              </button>
+            `).join('')}
+          </div>
+          <div class="md:col-span-7 flex flex-col justify-between min-h-[280px]">
+            ${activeConn ? `
+              <div>
+                <div class="pb-2.5 mb-3 border-b border-slate-200">
+                  <div class="font-bold text-sm text-[#0B4F6C]">${escapeHtml(activeConn.targetName)}</div>
+                  <div class="text-xs text-slate-500">${escapeHtml(activeConn.targetRole)}</div>
+                </div>
+                <div class="space-y-2.5 max-h-52 overflow-y-auto pr-1 mb-4">
+                  ${activeConn.messages.map(m => `
+                    <div class="p-3 rounded-xl text-xs ${m.sender === 'You' ? 'bg-[#0B4F6C] text-white ml-6' : 'bg-slate-100 text-slate-800 mr-6'}">
+                      <div class="font-bold mb-0.5 opacity-80">${escapeHtml(m.sender)} • ${escapeHtml(m.time)}</div>
+                      <div>${escapeHtml(m.text)}</div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+              <form onsubmit="sendNetworkMessage(event, '${activeConn.id}')" class="flex gap-2">
+                <input type="text" id="networkMsgInput" required placeholder="Write a message..." class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 text-xs outline-none focus:ring-2 focus:ring-[#10B981]" />
+                <button type="submit" class="px-4 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold">Send</button>
+              </form>
+            ` : `<p class="text-sm text-slate-500">Select a connection to start messaging.</p>`}
+          </div>
+        </div>
+      `;
+
+      const modal = document.getElementById('networkModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function sendNetworkMessage(e, connId) {
+      e.preventDefault();
+      const input = document.getElementById('networkMsgInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const conn = appState.connections.find(c => c.id === connId);
+      if (conn) {
+        conn.messages.push({ sender: 'You', text, time: 'Just now' });
+        saveState();
+        openNetworkDrawer(connId);
+      }
+    }
+
+    // ==================== 7. ROLE-BASED DASHBOARDS ====================
+
+    function renderDashboardView() {
+      const user = appState.currentUser || { role: 'refugee', name: 'Amina Khaled' };
+      if (user.role === 'employer') return renderEmployerDashboard();
+      if (user.role === 'mentor') return renderMentorDashboard();
+      return renderRefugeeDashboard();
+    }
+
+    // --- 7A. REFUGEE TALENT DASHBOARD ---
+    function renderRefugeeDashboard() {
+      const user = appState.currentUser && appState.currentUser.role === 'refugee'
+        ? appState.currentUser
+        : appState.talentProfiles[0];
+
+      const myJobApps = appState.jobApplications.filter(a => a.applicantId === user.id);
+      const myInternApps = appState.internshipApplications.filter(a => a.applicantId === user.id);
+      const myMentorships = appState.mentorshipRequests.filter(r => r.menteeId === user.id);
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+          <!-- Dashboard Header -->
+          <div class="bg-gradient-to-r from-[#0B4F6C] to-[#1E6091] rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
+            <div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">Refugee Professional Workspace</span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold mt-2">Welcome back, ${escapeHtml(user.name)}</h1>
+              <p class="text-sm text-sky-100 mt-1">${escapeHtml(user.title)} • ${escapeHtml(user.location)}</p>
+            </div>
+            <div class="grid grid-cols-3 gap-3 text-center">
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-xl font-extrabold text-emerald-300">${myJobApps.length}</div>
+                <div class="text-[11px] text-sky-100">Job Apps</div>
+              </div>
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-xl font-extrabold text-white">${myInternApps.length}</div>
+                <div class="text-[11px] text-sky-100">Internships</div>
+              </div>
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-xl font-extrabold text-emerald-300">${myMentorships.length}</div>
+                <div class="text-[11px] text-sky-100">Mentors</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Profile & CV Editor -->
+            <div class="lg:col-span-6 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold text-[#0B4F6C]"><i class="fa-solid fa-id-badge text-[#10B981] mr-2"></i>My Professional Profile & CV</h2>
+                <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Live on Directory</span>
+              </div>
+              <form onsubmit="saveRefugeeProfile(event)" class="space-y-3.5 text-sm">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" id="profName" value="${escapeHtml(user.name)}" required class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Location / Remote Preference</label>
+                    <input type="text" id="profLocation" value="${escapeHtml(user.location)}" required class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Professional Title</label>
+                  <input type="text" id="profTitle" value="${escapeHtml(user.title)}" required class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Technical & Core Skills (comma separated — updates Job Match %)</label>
+                  <input type="text" id="profSkills" value="${escapeHtml((user.skills || []).join(', '))}" required class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#10B981]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Education & Qualifications</label>
+                  <input type="text" id="profEducation" value="${escapeHtml(user.education || '')}" class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Professional Experience Summary</label>
+                  <textarea id="profExperience" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]">${escapeHtml(user.experience || '')}</textarea>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Portfolio URL</label>
+                    <input type="url" id="profPortfolio" value="${escapeHtml(user.portfolioUrl || '')}" class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Upload CV / Resume (PDF/DOC)</label>
+                    <label class="flex items-center justify-between px-3 py-2 rounded-xl border border-dashed border-[#1E6091] bg-sky-50/50 cursor-pointer hover:bg-sky-50 text-xs">
+                      <span id="cvFileLabel" class="truncate text-slate-700 font-medium"><i class="fa-solid fa-file-arrow-up text-[#1E6091] mr-1.5"></i>${escapeHtml(user.cvFileName || 'Upload CV')}</span>
+                      <input type="file" accept=".pdf,.doc,.docx" onchange="handleCvUpload(event)" class="hidden" />
+                    </label>
+                  </div>
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-bold text-sm shadow transition">
+                  Save Profile & Recalculate Job Matches
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Activity Tracking -->
+            <div class="lg:col-span-6 space-y-6">
+              <!-- Job Applications -->
+              <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-bold text-[#0B4F6C] text-base"><i class="fa-solid fa-briefcase text-[#1E6091] mr-2"></i>My Job Applications</h3>
+                  <button onclick="navigateTo('jobs')" class="text-xs font-semibold text-[#10B981] hover:underline">+ Find More Jobs</button>
+                </div>
+                ${myJobApps.length ? `
+                  <div class="space-y-2.5">
+                    ${myJobApps.map(a => `
+                      <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+                        <div>
+                          <div class="font-bold text-sm text-slate-900">${escapeHtml(a.jobTitle)}</div>
+                          <div class="text-xs text-slate-500">${escapeHtml(a.company)} • Applied ${escapeHtml(a.appliedDate)}</div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-sky-100 text-[#0B4F6C]">${escapeHtml(a.status)}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                ` : `<p class="text-xs text-slate-500">No job applications yet. Visit Find Jobs to apply!</p>`}
+              </div>
+
+              <!-- Virtual Internships -->
+              <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-bold text-[#0B4F6C] text-base"><i class="fa-solid fa-laptop-code text-[#10B981] mr-2"></i>My Virtual Internships</h3>
+                  <button onclick="navigateTo('internships')" class="text-xs font-semibold text-[#10B981] hover:underline">+ Browse Projects</button>
+                </div>
+                ${myInternApps.length ? `
+                  <div class="space-y-2.5">
+                    ${myInternApps.map(i => `
+                      <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+                        <div>
+                          <div class="font-bold text-sm text-slate-900">${escapeHtml(i.internshipTitle)}</div>
+                          <div class="text-xs text-slate-500">${escapeHtml(i.organization)} • ${escapeHtml(i.appliedDate)}</div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">${escapeHtml(i.status)}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                ` : `<p class="text-xs text-slate-500">No virtual internship applications yet.</p>`}
+              </div>
+
+              <!-- Mentorship Sessions -->
+              <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-bold text-[#0B4F6C] text-base"><i class="fa-solid fa-chalkboard-user text-[#1E6091] mr-2"></i>Mentorship Connections</h3>
+                  <button onclick="navigateTo('mentorship')" class="text-xs font-semibold text-[#10B981] hover:underline">+ Find Mentors</button>
+                </div>
+                ${myMentorships.length ? `
+                  <div class="space-y-2.5">
+                    ${myMentorships.map(m => `
+                      <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="flex items-center justify-between">
+                          <div class="font-bold text-sm text-slate-900">${escapeHtml(m.mentorName)}</div>
+                          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">${escapeHtml(m.status)}</span>
+                        </div>
+                        <div class="text-xs text-slate-600 mt-1">Focus: ${escapeHtml(m.topic)}</div>
+                      </div>
+                    `).join('')}
+                  </div>
+                ` : `<p class="text-xs text-slate-500">No mentorship requests yet.</p>`}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleCvUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('cvFileLabel').innerHTML = `<i class="fa-solid fa-file-check text-[#10B981] mr-1.5"></i>${escapeHtml(file.name)}`;
+      if (appState.currentUser) {
+        appState.currentUser.cvFileName = file.name;
+      }
+      showToast(`Attached CV: ${file.name}`, 'info');
+    }
+
+    function saveRefugeeProfile(e) {
+      e.preventDefault();
+      const name = document.getElementById('profName').value.trim();
+      const location = document.getElementById('profLocation').value.trim();
+      const title = document.getElementById('profTitle').value.trim();
+      const skills = document.getElementById('profSkills').value.split(',').map(s => s.trim()).filter(Boolean);
+      const education = document.getElementById('profEducation').value.trim();
+      const experience = document.getElementById('profExperience').value.trim();
+      const portfolioUrl = document.getElementById('profPortfolio').value.trim();
+
+      if (appState.currentUser && appState.currentUser.role === 'refugee') {
+        Object.assign(appState.currentUser, { name, location, title, skills, education, experience, portfolioUrl });
+        const dirEntry = appState.talentProfiles.find(t => t.id === appState.currentUser.id);
+        if (dirEntry) {
+          Object.assign(dirEntry, { name, location, title, skills, education, experience, portfolioUrl, cvFileName: appState.currentUser.cvFileName });
+        }
+      }
+
+      saveState();
+      updateHeaderUI();
+      renderCurrentView();
+      showToast('Profile saved! Job match percentages updated across the platform.', 'success');
+    }
+
+    // --- 7B. EMPLOYER DASHBOARD ---
+    function renderEmployerDashboard() {
+      const employerName = appState.currentUser?.name || 'Horizon Tech Global';
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+          <div class="bg-gradient-to-r from-[#0B4F6C] to-[#1E6091] rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
+            <div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-sky-400/20 text-sky-200 border border-sky-300/30">Inclusive Employer Portal</span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold mt-2">${escapeHtml(employerName)}</h1>
+              <p class="text-sm text-sky-100 mt-1">Publish skills-based roles & virtual internships, and review verified refugee candidates.</p>
+            </div>
+            <div class="flex gap-3">
+              <div class="bg-white/10 rounded-xl px-4 py-3 text-center">
+                <div class="text-xl font-extrabold text-emerald-300">${appState.jobs.length}</div>
+                <div class="text-[11px] text-sky-100">Active Roles</div>
+              </div>
+              <div class="bg-white/10 rounded-xl px-4 py-3 text-center">
+                <div class="text-xl font-extrabold text-white">${appState.jobApplications.length}</div>
+                <div class="text-[11px] text-sky-100">Applicants</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Post New Job or Internship Form -->
+            <div class="lg:col-span-5 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <h2 class="text-lg font-bold text-[#0B4F6C] mb-4"><i class="fa-solid fa-circle-plus text-[#10B981] mr-2"></i>Post New Opportunity</h2>
+              <form onsubmit="handlePostOpportunity(event)" class="space-y-3.5 text-sm">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Opportunity Type</label>
+                  <select id="oppType" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white outline-none">
+                    <option value="job">Full-Time / Contract Job</option>
+                    <option value="internship">Virtual Project Internship</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Role / Project Title</label>
+                  <input type="text" id="oppTitle" required placeholder="e.g., Remote Backend Python Developer" class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-[#1E6091]" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Work Mode</label>
+                    <select id="oppMode" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white outline-none">
+                      <option value="Remote">Remote</option>
+                      <option value="Hybrid">Hybrid</option>
+                      <option value="On-site">On-site</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Salary / Stipend</label>
+                    <input type="text" id="oppComp" required placeholder="e.g., $45,000/yr or $500" class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Required Skills (comma separated)</label>
+                  <input type="text" id="oppSkills" required placeholder="e.g., Python, SQL, REST APIs, Git" class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Description / Project Deliverable</label>
+                  <textarea id="oppDesc" rows="3" required placeholder="Describe responsibilities and inclusive hiring support..." class="w-full px-3 py-2 rounded-xl border border-slate-300 outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-[#0B4F6C] hover:bg-[#1E6091] text-white font-bold text-sm shadow transition">
+                  Publish Opportunity Live
+                </button>
+              </form>
+            </div>
+
+            <!-- Candidate Applicants Review -->
+            <div class="lg:col-span-7 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold text-[#0B4F6C]"><i class="fa-solid fa-users-viewfinder text-[#10B981] mr-2"></i>Refugee Talent Applicants</h2>
+                <button onclick="navigateTo('talent')" class="text-xs font-semibold text-[#1E6091] hover:underline">Source Talent Directory →</button>
+              </div>
+              <div class="space-y-3">
+                ${appState.jobApplications.map(app => `
+                  <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="font-bold text-sm text-slate-900">${escapeHtml(app.applicantName)}</span>
+                        <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">${app.matchScore}% Skill Match</span>
+                      </div>
+                      <p class="text-xs text-slate-600">${escapeHtml(app.applicantTitle || 'Verified Refugee Professional')}</p>
+                      <p class="text-xs text-[#1E6091] font-medium mt-1">Applied for: ${escapeHtml(app.jobTitle)} (${escapeHtml(app.company)})</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <button onclick="updateApplicationStatus('${app.id}', 'Interview Invited')" class="px-3 py-1.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold transition">
+                        Shortlist / Interview
+                      </button>
+                      <span class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700">
+                        ${escapeHtml(app.status)}
+                      </span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handlePostOpportunity(e) {
+      e.preventDefault();
+      const type = document.getElementById('oppType').value;
+      const title = document.getElementById('oppTitle').value.trim();
+      const mode = document.getElementById('oppMode').value;
+      const comp = document.getElementById('oppComp').value.trim();
+      const skills = document.getElementById('oppSkills').value.split(',').map(s => s.trim()).filter(Boolean);
+      const desc = document.getElementById('oppDesc').value.trim();
+      const orgName = appState.currentUser?.name || 'Horizon Tech Global';
+
+      if (type === 'job') {
+        appState.jobs.unshift({
+          id: `job-${Date.now()}`,
+          title,
+          company: orgName,
+          companyLogo: 'fa-building',
+          location: `${mode} (Global)`,
+          workMode: mode,
+          category: 'Software Engineering',
+          salary: comp,
+          postedAgo: 'Just now',
+          skillsRequired: skills,
+          description: desc,
+          inclusivePerks: ['Skills-First Hiring', 'Verified Employer']
+        });
+        showToast(`Published new job: "${title}"!`, 'success');
+      } else {
+        appState.internships.unshift({
+          id: `int-${Date.now()}`,
+          title,
+          organization: orgName,
+          duration: '6 Weeks (10 hrs/week)',
+          stipend: `${comp} + Certificate`,
+          skillsGained: skills,
+          deliverables: desc,
+          spotsLeft: 4
+        });
+        showToast(`Published new virtual internship: "${title}"!`, 'success');
+      }
+
+      saveState();
+      renderCurrentView();
+    }
+
+    function updateApplicationStatus(appId, newStatus) {
+      const app = appState.jobApplications.find(a => a.id === appId);
+      if (app) {
+        app.status = newStatus;
+        saveState();
+        renderCurrentView();
+        showToast(`Candidate ${app.applicantName} updated to: ${newStatus}`, 'success');
+      }
+    }
+
+    // --- 7C. MENTOR DASHBOARD ---
+    function renderMentorDashboard() {
+      const mentorUser = appState.currentUser || appState.mentors[0];
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+          <div class="bg-gradient-to-r from-[#0B4F6C] to-[#10B981] rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-md">
+            <div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-white/15 text-emerald-200">Industry Mentor Hub</span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold mt-2">Welcome, ${escapeHtml(mentorUser.name)}</h1>
+              <p class="text-sm text-sky-100 mt-1">${escapeHtml(mentorUser.title || 'Senior Industry Mentor')}</p>
+            </div>
+            <div class="bg-white/15 rounded-xl px-5 py-3 text-center">
+              <div class="text-2xl font-extrabold text-white">${appState.mentorshipRequests.length}</div>
+              <div class="text-xs text-emerald-100">Mentorship Requests</div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+            <h2 class="text-lg font-bold text-[#0B4F6C] mb-4"><i class="fa-solid fa-inbox text-[#10B981] mr-2"></i>Incoming Mentorship Requests from Refugee Professionals</h2>
+            <div class="space-y-4">
+              ${appState.mentorshipRequests.map(req => `
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div class="space-y-1.5">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="font-bold text-base text-slate-900">${escapeHtml(req.menteeName)}</span>
+                      <span class="text-xs text-slate-500">• ${escapeHtml(req.menteeTitle || 'Skilled Refugee Professional')}</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-100 text-[#0B4F6C]">For: ${escapeHtml(req.mentorName)}</span>
+                    </div>
+                    <div class="text-xs font-semibold text-[#10B981]">Topic: ${escapeHtml(req.topic)}</div>
+                    <p class="text-sm text-slate-700 bg-white p-3 rounded-xl border border-slate-200 mt-2">"${escapeHtml(req.note)}"</p>
+                  </div>
+                  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0">
+                    <span class="px-3 py-1.5 rounded-xl text-xs font-bold text-center ${req.status.includes('Accepted') ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                      ${escapeHtml(req.status)}
+                    </span>
+                    ${!req.status.includes('Accepted') ? `
+                      <button onclick="acceptMentorshipRequest('${req.id}')" class="px-4 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow transition">
+                        Accept & Schedule Session
+                      </button>
+                    ` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function acceptMentorshipRequest(reqId) {
+      const req = appState.mentorshipRequests.find(r => r.id === reqId);
+      if (req) {
+        req.status = 'Accepted — Session Scheduled';
+        saveState();
+        renderCurrentView();
+        showToast(`Mentorship session confirmed with ${req.menteeName}!`, 'success');
+      }
+    }
+
+    // ==================== INITIAL BOOT ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      updateHeaderUI();
+      renderCurrentView();
+    });
+  </script>
+</body>
+</html>
